@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 1 · Principles of Data Science and the Analytics Lifecycle</title>
+<style>
+  :root{
+    --ink:#1b1f3b; --muted:#5a6080; --bg:#f7f7fc; --card:#ffffff;
+    --vio:#7c3aed; --ind:#4f46e5; --pink:#ec4899; --teal:#0d9488; --amber:#d97706;
+    --line:#e6e6f2; --soft:#eef0ff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI',system-ui,-apple-system,Roboto,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.65}
+  .wrap{max-width:960px;margin:0 auto;padding:24px 20px 80px}
+  .hero{background:linear-gradient(135deg,#4f46e5 0%,#7c3aed 45%,#ec4899 100%);color:#fff;border-radius:24px;padding:44px 36px;margin-bottom:28px;position:relative;overflow:hidden}
+  .hero .kicker{font-size:.8rem;letter-spacing:.18em;text-transform:uppercase;opacity:.85;font-weight:700}
+  .hero h1{font-size:2.1rem;line-height:1.2;margin:.4rem 0 .6rem}
+  .hero p{max-width:640px;opacity:.95}
+  .hero .meta{margin-top:14px;font-size:.85rem;opacity:.9}
+  .hero .blob{position:absolute;right:-60px;top:-60px;width:260px;height:260px;border-radius:50%;background:rgba(255,255,255,.12)}
+  .hero .blob2{position:absolute;right:60px;bottom:-90px;width:180px;height:180px;border-radius:50%;background:rgba(255,255,255,.10)}
+  h2{font-size:1.45rem;margin:2.2rem 0 .7rem;color:var(--ind)}
+  h3{font-size:1.08rem;margin:1.3rem 0 .4rem}
+  p{margin:.55rem 0}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px 24px;margin:14px 0;box-shadow:0 1px 4px rgba(27,31,59,.05)}
+  .tag{display:inline-block;background:var(--soft);color:var(--ind);font-weight:700;font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;border-radius:999px;padding:3px 12px;margin-right:6px}
+  .src{font-size:.8rem;color:var(--muted);font-style:italic}
+  .big-emoji{font-size:1.5rem;margin-right:.4rem}
+  /* lifecycle flow */
+  .flow{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:18px 0}
+  .stage{flex:1 1 140px;max-width:150px;background:#fff;border:2px solid var(--line);border-radius:16px;padding:14px 10px;text-align:center;position:relative}
+  .stage .n{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--ind),var(--pink));color:#fff;font-weight:800;font-size:.85rem;display:flex;align-items:center;justify-content:center;margin:0 auto 6px}
+  .stage .ic{font-size:1.6rem}
+  .stage b{display:block;font-size:.85rem;margin-top:4px}
+  .stage small{color:var(--muted);font-size:.72rem;line-height:1.3;display:block;margin-top:3px}
+  .arrowline{text-align:center;color:var(--vio);font-weight:800;font-size:1rem;margin:2px 0}
+  /* pillars */
+  .pillars{display:flex;gap:12px;flex-wrap:wrap;margin:16px 0}
+  .pillar{flex:1 1 220px;border-radius:16px;padding:18px;color:#fff}
+  .pillar h4{font-size:1rem;margin-bottom:4px}
+  .pillar p{font-size:.85rem;opacity:.95}
+  .p1{background:linear-gradient(160deg,#4f46e5,#6366f1)}
+  .p2{background:linear-gradient(160deg,#7c3aed,#a855f7)}
+  .p3{background:linear-gradient(160deg,#db2777,#ec4899)}
+  /* cleaning steps */
+  .steps{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0}
+  .step{flex:1 1 160px;background:#fff;border-left:5px solid var(--teal);border-radius:12px;padding:12px 14px;border-top:1px solid var(--line);border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .step b{font-size:.88rem}
+  .step small{color:var(--muted);display:block;font-size:.76rem;line-height:1.35;margin-top:2px}
+  /* versus */
+  .versus{display:flex;gap:12px;flex-wrap:wrap;margin:14px 0}
+  .vhalf{flex:1 1 300px;border-radius:16px;padding:18px}
+  .v1{background:#eef6ff;border:1.5px solid #bfdbfe}
+  .v2{background:#fdf2f8;border:1.5px solid #fbcfe8}
+  .vhalf h4{margin-bottom:6px}
+  .vhalf ul{margin:6px 0 0 18px;font-size:.9rem}
+  /* quiz + tests */
+  .qcard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:12px 0}
+  .qnum{display:inline-flex;align-items:center;justify-content:center;min-width:30px;height:30px;border-radius:10px;background:linear-gradient(135deg,var(--ind),var(--vio));color:#fff;font-weight:800;font-size:.85rem;margin-right:8px;padding:0 8px}
+  .lvl{display:inline-block;font-size:.68rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;border-radius:999px;padding:2px 10px;margin-left:6px;vertical-align:2px}
+  .lvl.Applying{background:#ecfdf5;color:#047857}
+  .lvl.Analyzing{background:#eff6ff;color:#1d4ed8}
+  .lvl.Evaluating{background:#fff7ed;color:#c2410c}
+  .lvl.Creating{background:#fdf4ff;color:#a21caf}
+  .choices{margin:10px 0 4px 4px}
+  .choices div{padding:4px 8px;border-radius:8px;font-size:.93rem}
+  details{margin-top:8px;border-radius:10px;background:var(--soft);padding:10px 14px}
+  details summary{cursor:pointer;font-weight:700;color:var(--ind);font-size:.9rem;outline:none}
+  details p{font-size:.9rem;margin-top:6px}
+  .ans{font-weight:800;color:var(--vio)}
+  .sectionhead{background:linear-gradient(135deg,#111533,#31255f);color:#fff;border-radius:18px;padding:22px 26px;margin-top:38px}
+  .sectionhead h2{color:#fff;margin:0 0 4px}
+  .sectionhead p{opacity:.85;font-size:.9rem;margin:0}
+  .foot{margin-top:40px;font-size:.8rem;color:var(--muted);border-top:1px solid var(--line);padding-top:16px}
+  .callout{border-left:5px solid var(--amber);background:#fffbeb;border-radius:10px;padding:12px 16px;margin:12px 0;font-size:.92rem}
+  .essay-model{background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:12px;padding:14px 16px;margin-top:10px;font-size:.92rem}
+  @media print{ details{display:block} .hero{border-radius:0} }
+</style>
+</head>
+<body>
+<div class="wrap">
+<p style="margin:0 0 10px"><a href="../index.html" style="color:#4f46e5;font-weight:700;text-decoration:none">&larr; Back to AST09 Course Syllabus</a></p>
+
+<!-- ================= HERO ================= -->
+<div class="hero">
+  <div class="blob"></div><div class="blob2"></div>
+  <div class="kicker">Rizal Technological University · AST09 · Data Science and Analysis · Week 1 · CO3</div>
+  <h1>📊 Chapter 1: Principles of Data Science and the Analytics Lifecycle</h1>
+  <p>Every scroll, swipe, tap, and GCash payment you make today becomes data. This chapter is your starter pack: what data science actually is, how raw data becomes real decisions, and the lifecycle that every legit data project follows.</p>
+  <div class="meta" style="font-weight:700;font-size:.95rem;margin-top:16px">🎓 Lecture • Dr. Ryan Manuel D. Guido</div>
+  <div class="meta">Sources: Herman, Chs. 1–2 · Plaue, Intro. &amp; Ch. 1 · Grus, Ch. 1</div>
+</div>
+
+<!-- ================= 1.1 ================= -->
+<h2>1.1 Why Data Science? (Real Talk) 💬</h2>
+<div class="card">
+  <p>Think about your morning so far. Your phone's algorithm chose which videos you saw. Your ride app estimated your fare and ETA. The store where you bought breakfast logged the sale in its inventory system. None of that runs on vibes — it runs on <b>data</b> being collected, cleaned, analyzed, and turned into decisions.</p>
+  <p><b>Data science</b> is the interdisciplinary field that extracts insights and knowledge from data using scientific and computational methods — a mash-up of statistics, computer science, and domain expertise (Herman, Ch. 1; Grus, Ch. 1). Grus describes a data scientist as someone who finds insights hidden in messy, real-world data. Organizations use it for <b>data-driven decision-making</b>, which Herman (Ch. 1) says helps them:</p>
+  <div class="steps">
+    <div class="step"><b>📈 Spot market trends</b><small>and consumer preferences before competitors do</small></div>
+    <div class="step"><b>⚙️ Boost operational efficiency</b><small>find bottlenecks and fix workflows</small></div>
+    <div class="step"><b>🛡️ Mitigate risks</b><small>quantify uncertainty instead of guessing</small></div>
+    <div class="step"><b>💡 Drive innovation</b><small>new products and competitive advantage</small></div>
+  </div>
+  <p class="src">Source: Herman, Ch. 1 (Introduction to Data-Driven Decision-Making); Grus, Ch. 1.</p>
+</div>
+
+<div class="callout">🤔 <b>Think about this:</b> A milk tea chain notices matcha sales spiking every time a certain K-drama trends. Is that "data science" yet? Not quite — noticing is step zero. Data science is the <i>systematic process</i> that confirms the pattern, measures it, and turns it into a supply decision.</div>
+
+<!-- ================= 1.2 ================= -->
+<h2>1.2 Key Concepts and Terminology 🔑</h2>
+<div class="card">
+  <p>Herman (Ch. 1) defines the core vocabulary you'll use all semester:</p>
+  <div class="steps">
+    <div class="step"><b>Data</b><small>raw facts and figures — numbers, text, images, clicks — not yet meaningful on their own</small></div>
+    <div class="step"><b>Big Data</b><small>datasets so large and complex that traditional tools can't handle them</small></div>
+    <div class="step"><b>Data Types</b><small>structured (tables), unstructured (text, images, video), and everything in between</small></div>
+    <div class="step"><b>Machine Learning</b><small>algorithms that learn patterns from data instead of following hand-written rules</small></div>
+    <div class="step"><b>Predictive Analytics</b><small>using historical data to forecast what happens next</small></div>
+    <div class="step"><b>Data Visualization</b><small>turning numbers into charts people can actually understand</small></div>
+    <div class="step"><b>Algorithm</b><small>a step-by-step procedure a computer follows to solve a problem</small></div>
+  </div>
+  <h3>Descriptive vs. Inferential Statistics</h3>
+  <div class="versus">
+    <div class="vhalf v1">
+      <h4>🧾 Descriptive</h4>
+      <p>Summarizes the data you <i>have</i>.</p>
+      <ul>
+        <li>"Average screen time in our survey: 7.2 hours."</li>
+        <li>"Store B sold the most last month."</li>
+      </ul>
+    </div>
+    <div class="vhalf v2">
+      <h4>🔮 Inferential</h4>
+      <p>Generalizes from a sample to a bigger <i>population</i>.</p>
+      <ul>
+        <li>"Based on 500 respondents, we estimate 62% of ALL students prefer online enrollment."</li>
+      </ul>
+    </div>
+  </div>
+  <p class="src">Source: Herman, Chs. 1–2 (Key Concepts; Statistical Fundamentals).</p>
+</div>
+
+<!-- ================= 1.3 ================= -->
+<h2>1.3 The Data Science Lifecycle 🔄</h2>
+<div class="card">
+  <p>Herman (Ch. 1) presents the <b>data science lifecycle</b> — the roadmap every serious data project follows. Skipping a stage is how projects flop.</p>
+  <div class="flow">
+    <div class="stage"><div class="n">1</div><div class="ic">📥</div><b>Data Acquisition</b><small>collect data from sources: databases, surveys, sensors, APIs, web</small></div>
+    <div class="stage"><div class="n">2</div><div class="ic">🧹</div><b>Data Preparation</b><small>clean, transform, and organize raw data into analysis-ready form</small></div>
+    <div class="stage"><div class="n">3</div><div class="ic">🔍</div><b>Exploratory Data Analysis</b><small>summarize, visualize, and understand patterns before modeling</small></div>
+    <div class="stage"><div class="n">4</div><div class="ic">🤖</div><b>Model Development</b><small>build statistical or machine learning models</small></div>
+    <div class="stage"><div class="n">5</div><div class="ic">✅</div><b>Model Evaluation</b><small>test performance on unseen data — does it actually work?</small></div>
+    <div class="stage"><div class="n">6</div><div class="ic">🚀</div><b>Deployment &amp; Monitoring</b><small>put the model into use and watch its performance over time</small></div>
+  </div>
+  <div class="arrowline">↺ Monitoring feeds back into new data and better models — it's a loop, not a line.</div>
+  <p><b>Why the loop matters:</b> a model that predicted well in June can drift by December — user behavior changes, new products launch, a pandemic happens. That's why <i>deployment and monitoring</i> is a stage, not an afterthought (Herman, Ch. 1).</p>
+  <p class="src">Source: Herman, Ch. 1 (The Data Science Lifecycle).</p>
+</div>
+
+<div class="callout">📱 <b>Case snapshot (Herman, Ch. 1):</b> A retail chain used the lifecycle to optimize its supply chain — acquiring sales and inventory data per store, preparing and exploring it, then modeling demand against market trends. The visual analyses of sales quantity vs. inventory levels by store guided restocking decisions. Same playbook, whether it's a mega-retailer or your org's merch booth.</div>
+
+<!-- ================= 1.4 ================= -->
+<h2>1.4 The Three Pillars of Data Science 🏛️</h2>
+<div class="card">
+  <p>Plaue (Introduction) organizes the whole field into three pillars — and conveniently, they map to the three parts of our course:</p>
+  <div class="pillars">
+    <div class="pillar p1"><h4>🗂️ Data Organization</h4><p>Structuring data conceptually and logically, ensuring its quality, and summarizing it with descriptive statistics.</p></div>
+    <div class="pillar p2"><h4>🎲 Stochastics</h4><p>Probability theory + inferential statistics — the foundation for reasoning under uncertainty.</p></div>
+    <div class="pillar p3"><h4>🧠 Machine Learning</h4><p>Algorithms that learn rules from training data instead of being explicitly programmed.</p></div>
+  </div>
+  <p class="src">Source: Plaue, Introduction.</p>
+</div>
+
+<!-- ================= 1.5 ================= -->
+<h2>1.5 Data Collection: Sources, Techniques, and Quality 📥</h2>
+<div class="card">
+  <p>Herman (Ch. 2) calls data collection "the backbone of data science." Three things to master:</p>
+  <p><b>Data sources.</b> Internal databases, public datasets, surveys, sensors and IoT devices, web platforms and social media.</p>
+  <p><b>Acquisition techniques.</b> Querying databases, running surveys, web scraping, connecting to APIs, logging from sensors.</p>
+  <p><b>Quality and integrity.</b> Garbage in, garbage out. Plaue (Secs. 1.3) breaks quality into <b>dimensions</b> — is the data accurate? complete? consistent? current? If your dataset says a student weighs 650 kg, no fancy model can save the analysis.</p>
+  <p class="src">Source: Herman, Ch. 2 (Data Collection); Plaue, Secs. 1.1–1.3 (Data organization and quality).</p>
+</div>
+
+<!-- ================= 1.6 ================= -->
+<h2>1.6 Data Cleaning: The Unskippable Grind 🧹</h2>
+<div class="card">
+  <p>Real-world data is messy — typos, blanks, duplicates, "N/A" written five different ways. Plaue (Sec. 1.4) gives the five core cleaning operations:</p>
+  <div class="steps">
+    <div class="step"><b>1️⃣ Validation</b><small>detect impossible or implausible values (age = 190, negative sales)</small></div>
+    <div class="step"><b>2️⃣ Standardization</b><small>put values in consistent formats (dates, units, spellings, categories)</small></div>
+    <div class="step"><b>3️⃣ Imputation</b><small>fill in missing values with reasonable estimates instead of throwing rows away</small></div>
+    <div class="step"><b>4️⃣ Augmentation</b><small>enrich or expand the data — e.g., generating additional training examples</small></div>
+    <div class="step"><b>5️⃣ Deduplication</b><small>find and merge duplicate records so nothing is counted twice</small></div>
+  </div>
+  <p class="src">Source: Plaue, Sec. 1.4; Herman, Ch. 2 (Data Preprocessing).</p>
+</div>
+
+<!-- ================= 1.7 ================= -->
+<h2>1.7 Inference vs. Prediction 🔮</h2>
+<div class="card">
+  <p>Herman (Ch. 2) distinguishes the two big goals of analysis — you'll meet this distinction again and again:</p>
+  <div class="versus">
+    <div class="vhalf v1">
+      <h4>🧪 Inference</h4>
+      <p>Understanding relationships in a <b>population</b>: "Did the feeding program actually improve attendance, or is the difference just chance?" Inference generalizes from samples while accounting for uncertainty.</p>
+    </div>
+    <div class="vhalf v2">
+      <h4>🎯 Prediction</h4>
+      <p>Forecasting <b>individual future outcomes</b>: "Which of tomorrow's orders will be cancelled?" We may care less about <i>why</i> and more about being right.</p>
+    </div>
+  </div>
+  <p>Both rely on the same statistical foundations — probability distributions, hypothesis testing, regression, and statistical inference (Herman, Ch. 2) — which are exactly what Chapters 2–4 will review.</p>
+  <p class="src">Source: Herman, Ch. 2 (Inference and Prediction; Statistical Fundamentals).</p>
+</div>
+
+<!-- ================= Takeaways ================= -->
+<h2>1.8 Key Takeaways 🎒</h2>
+<div class="card">
+  <p>✅ Data science = statistics + computing + domain knowledge, aimed at insight and better decisions.<br>
+  ✅ The lifecycle has six stages: acquisition → preparation → EDA → model development → evaluation → deployment &amp; monitoring — and it loops.<br>
+  ✅ The field stands on three pillars: data organization, stochastics, machine learning.<br>
+  ✅ Data quality is everything; cleaning = validation, standardization, imputation, augmentation, deduplication.<br>
+  ✅ Descriptive summarizes what you have; inferential generalizes beyond it. Inference explains; prediction forecasts.</p>
+</div>
+
+<!-- ================= (i) SELF-CHECK ================= -->
+<div class="sectionhead"><h2>📝 Assessment (i): 10-Item Self-Check Quiz</h2><p>Answer each item mentally (or in your notebook), then tap the dropdown to check yourself. No grades here — this is your personal debug console.</p></div>
+<div id="selfcheck"></div>
+
+<!-- ================= (ii) HOTS TEST ================= -->
+<div class="sectionhead"><h2>🧠 Assessment (ii): 20-Item HOTS Multiple-Choice Test</h2><p>Higher-Order Thinking Skills: every item is a scenario that makes you apply, analyze, evaluate, or create — not just recall. Choose the best answer, then tap to verify.</p></div>
+<div id="hots"></div>
+
+<!-- ================= (iii) REINFORCEMENT ================= -->
+<div class="sectionhead"><h2>💪 Assessment (iii): 20-Item Reinforcement Exercise (Assignment)</h2><p>Take-home HOTS drill. Answer all 20 before opening any dropdown — treat it like a real assignment, then self-correct.</p></div>
+<div id="reinforce"></div>
+
+<!-- ================= (iv) ESSAYS ================= -->
+<div class="sectionhead"><h2>✍️ Assessment (iv): 3-Item Essay — The Future of Chapter 1's Topics</h2><p>Write 150–250 words per item. A short model answer is provided under each dropdown, grounded in Herman, Ch. 8 (The Future of Data Analytics).</p></div>
+<div id="essays"></div>
+
+<div class="foot">
+  <b>Chapter sources:</b> Herman, E. (2024). <i>Data Science for Decision Makers</i>, Chs. 1–2 &amp; 8 · Plaue, M. (2023). <i>Data Science</i>, Introduction &amp; Ch. 1 · Grus, J. (2015). <i>Data Science from Scratch</i>, Ch. 1.<br>
+  <b>Lecture • Dr. Ryan Manuel D. Guido</b> · Rizal Technological University.<br>
+  Companion material to the RTU AST09 Data Science and Analysis 15-week syllabus (Week 1 · CO3). Cognitive levels follow the revised Bloom's taxonomy used in the course assessments.
+</div>
+</div>
+
+<script>
+const selfCheck = [
+  {q:"List the six stages of the data science lifecycle in order.",
+   a:"Data acquisition → data preparation → exploratory data analysis → model development → model evaluation → deployment and monitoring.",
+   e:"Herman (Ch. 1) presents the lifecycle as a loop: monitoring generates feedback and new data that restart the cycle."},
+  {q:"Define data science in one sentence.",
+   a:"Data science is an interdisciplinary field that extracts insights and knowledge from data using scientific and computational methods.",
+   e:"It combines statistics, computing, and domain expertise (Herman, Ch. 1; Grus, Ch. 1)."},
+  {q:"What is the difference between descriptive and inferential statistics?",
+   a:"Descriptive statistics summarize the data you actually collected; inferential statistics generalize from a sample to a larger population.",
+   e:"\"Our respondents average 7.2 hours online\" is descriptive; \"we estimate all students average about 7 hours\" is inferential (Herman, Chs. 1–2)."},
+  {q:"Name the three pillars of data science according to Plaue.",
+   a:"Data organization, stochastics (probability + inferential statistics), and machine learning.",
+   e:"These map to the three parts of Plaue's book — and to the three phases of our course (Plaue, Intro.)."},
+  {q:"What is imputation?",
+   a:"Filling in missing values with reasonable estimates instead of deleting incomplete records.",
+   e:"One of Plaue's five cleaning operations (Sec. 1.4); it preserves sample size and reduces bias from dropped rows."},
+  {q:"Give at least two data acquisition techniques.",
+   a:"Any two of: querying databases, surveys, web scraping, APIs, sensor/IoT logging.",
+   e:"Herman (Ch. 2) lists these under data acquisition techniques — the choice depends on the source and the question."},
+  {q:"What is deduplication and why does it matter?",
+   a:"Finding and merging duplicate records so the same entity isn't counted twice.",
+   e:"Duplicates inflate counts and distort averages — e.g., \"Juan Dela Cruz\" and \"J. dela Cruz\" with the same phone number (Plaue, Sec. 1.4)."},
+  {q:"What is the goal of exploratory data analysis (EDA)?",
+   a:"To summarize, visualize, and understand the data's patterns, distributions, and anomalies before any modeling.",
+   e:"EDA guides model choice and catches problems early (Herman, Chs. 1–2)."},
+  {q:"What happens during deployment and monitoring?",
+   a:"The model is put into real use, and its performance is tracked over time so degradation (drift) is caught and corrected.",
+   e:"Monitoring closes the lifecycle loop — models can decay as the world changes (Herman, Ch. 1)."},
+  {q:"Differentiate inference and prediction in one line each.",
+   a:"Inference: drawing conclusions about relationships in a population from sample data. Prediction: forecasting outcomes for new, individual cases.",
+   e:"Inference asks \"is this effect real?\"; prediction asks \"what will happen next?\" (Herman, Ch. 2)."}
+];
+
+const hots = [
+  {l:"Applying", q:"An LGU installs water-level sensors along a river and streams the readings into a central database. In the data science lifecycle, this activity belongs to:",
+   c:["A. Model evaluation","B. Data acquisition","C. Exploratory data analysis","D. Deployment and monitoring"], a:"B",
+   e:"Collecting data from sensors into storage is acquisition — the lifecycle's first stage (Herman, Ch. 1)."},
+  {l:"Analyzing", q:"A student team collects survey data and immediately trains a model, skipping preparation and EDA. The most likely consequence is:",
+   c:["A. Faster but equally reliable results","B. A model fitted to dirty, misunderstood data that produces misleading outputs","C. Automatic correction of errors by the algorithm","D. No consequence, since evaluation comes later anyway"], a:"B",
+   e:"Skipped cleaning and exploration means unnoticed errors and patterns; \"garbage in, garbage out\" (Herman, Chs. 1–2)."},
+  {l:"Applying", q:"A sari-sari store's sales sheet records out-of-stock items as \"N/A\", blank, or \"wala\". The cleaning operation that directly fixes this inconsistency is:",
+   c:["A. Standardization","B. Deduplication","C. Augmentation","D. Model evaluation"], a:"A",
+   e:"Standardization converts differently-written values into one consistent representation (Plaue, Sec. 1.4)."},
+  {l:"Analyzing", q:"A survey of Grade 12 students lists ages 17, 18, and 190. Detecting the impossible value is an example of:",
+   c:["A. Imputation","B. Augmentation","C. Validation","D. Prediction"], a:"C",
+   e:"Validation screens for implausible or impossible values (Plaue, Sec. 1.4)."},
+  {l:"Applying", q:"Monthly income is missing for 8% of respondents, and the team wants to keep all rows for analysis. The most appropriate operation is:",
+   c:["A. Deduplication","B. Imputation","C. Deleting the income variable","D. Collecting an entirely new dataset"], a:"B",
+   e:"Imputation fills the gaps with reasonable estimates, preserving the sample (Plaue, Sec. 1.4)."},
+  {l:"Analyzing", q:"After merging two encoders' files, the roster shows \"Juan Dela Cruz\" and \"J. dela Cruz\" with the same phone number. The correct cleaning response is:",
+   c:["A. Validation, because a value is impossible","B. Imputation, because a value is missing","C. Deduplication, because one person appears as two records","D. Augmentation, because more data is always better"], a:"C",
+   e:"Same entity, two records — merge them so the person isn't double-counted (Plaue, Sec. 1.4)."},
+  {l:"Evaluating", q:"Which statement is inferential rather than descriptive?",
+   c:["A. \"Our 500 respondents averaged 7.2 hours of screen time.\"","B. \"Store B had the highest sales in July.\"","C. \"Based on our sample, we estimate that 62% of all RTU students prefer online enrollment.\"","D. \"Half of the surveyed jeepney drivers use a navigation app.\""], a:"C",
+   e:"Only C generalizes beyond the collected data to a whole population (Herman, Chs. 1–2)."},
+  {l:"Analyzing", q:"A streaming app forecasts which show you will watch next. This task is primarily:",
+   c:["A. Inference, because it explains population relationships","B. Prediction, because it forecasts an individual future outcome","C. Descriptive statistics, because it summarizes history","D. Validation, because it checks data quality"], a:"B",
+   e:"Forecasting an individual's next action is prediction (Herman, Ch. 2)."},
+  {l:"Analyzing", q:"A researcher asks whether a city-wide feeding program genuinely improved attendance across all public schools, beyond chance. This goal is primarily:",
+   c:["A. Prediction","B. Inference","C. Data augmentation","D. Data visualization"], a:"B",
+   e:"Establishing whether a population-level effect is real is statistical inference (Herman, Ch. 2)."},
+  {l:"Applying", q:"\"Reasoning under uncertainty using probability and inferential statistics\" describes which pillar of data science (Plaue)?",
+   c:["A. Data organization","B. Stochastics","C. Machine learning","D. Deployment"], a:"B",
+   e:"Stochastics = probability theory + inferential statistics (Plaue, Intro.)."},
+  {l:"Analyzing", q:"A team studying rare crop diseases generates additional synthetic images of scarce disease categories to enlarge the training data. This operation is:",
+   c:["A. Deduplication","B. Validation","C. Augmentation","D. Standardization"], a:"C",
+   e:"Augmentation expands or enriches a dataset, e.g., creating extra training examples (Plaue, Sec. 1.4)."},
+  {l:"Evaluating", q:"A fraud-detection model performed well at launch but silently degraded after six months as scammer tactics changed. Which lifecycle stage exists precisely to catch this?",
+   c:["A. Data preparation","B. Exploratory data analysis","C. Model development","D. Deployment and monitoring"], a:"D",
+   e:"Monitoring tracks live performance so drift triggers retraining (Herman, Ch. 1)."},
+  {l:"Applying", q:"Before modeling dengue cases, an analyst plots case distributions per barangay and checks correlations with rainfall. This activity is:",
+   c:["A. Exploratory data analysis","B. Model deployment","C. Data acquisition","D. Deduplication"], a:"A",
+   e:"Summarizing and visualizing to understand patterns before modeling is EDA (Herman, Ch. 1)."},
+  {l:"Analyzing", q:"Which situation is primarily a completeness problem in data quality?",
+   c:["A. The barangay field is empty in 30% of rows","B. Weights are recorded in both kg and lbs","C. One resident appears three times","D. A recorded height of 4.5 meters"], a:"A",
+   e:"Missing values = completeness; B is consistency/standardization, C duplication, D validity (Plaue, Sec. 1.3)."},
+  {l:"Evaluating", q:"With a tight budget, a team must choose between surveying every household in a city (slow, expensive) or a well-designed sample plus inferential statistics. The stronger justification for sampling is:",
+   c:["A. Samples are always more accurate than censuses","B. A representative sample lets you estimate population characteristics at far lower cost, with quantifiable uncertainty","C. Inferential statistics remove the need for data cleaning","D. Smaller data always means better models"], a:"B",
+   e:"Inference exists to generalize from samples with known uncertainty (Herman, Ch. 2)."},
+  {l:"Analyzing", q:"Which sequence correctly orders a ride-hailing surge-pricing project?",
+   c:["A. Model development → acquisition → deployment → EDA","B. Acquisition → preparation → EDA → model development → evaluation → deployment","C. EDA → acquisition → evaluation → preparation → deployment","D. Deployment → evaluation → model development → EDA"], a:"B",
+   e:"That is the lifecycle order (Herman, Ch. 1)."},
+  {l:"Evaluating", q:"A group reports \"99% accuracy\" measured only on the data used to build the model. The best critique is:",
+   c:["A. Accuracy should be measured on unseen data during model evaluation; training-data accuracy can be misleadingly high","B. 99% is too low for deployment","C. Accuracy is not a valid metric in data science","D. The model should have used more pillars"], a:"A",
+   e:"Evaluation exists to test generalization to data the model has not seen (Herman, Ch. 1)."},
+  {l:"Applying", q:"\"The average daily screen time of our 300 respondents is 7.2 hours\" is an example of:",
+   c:["A. Inferential statistics","B. Descriptive statistics","C. Predictive analytics","D. Data augmentation"], a:"B",
+   e:"It summarizes the collected sample without generalizing beyond it (Herman, Ch. 1)."},
+  {l:"Analyzing", q:"A spam filter improves by learning from thousands of emails users have flagged, without anyone writing explicit rules. This illustrates:",
+   c:["A. An algorithm, but not machine learning","B. Machine learning — the model learns patterns from labeled data","C. Descriptive statistics","D. Data standardization"], a:"B",
+   e:"Learning rules from data rather than explicit programming is the definition of ML (Herman, Ch. 1; Plaue, Intro.)."},
+  {l:"Creating", q:"Your team must design a study of canteen food waste. Which plan best reflects the full data science lifecycle?",
+   c:["A. Weigh waste for a week, then immediately publish the averages","B. Build a prediction model first, then look for data that fits it","C. Collect daily waste and menu data → clean and standardize it → explore patterns → model waste vs. menu → evaluate on new weeks → recommend changes and keep monitoring","D. Survey students once and infer national waste behavior"], a:"C",
+   e:"Only C runs acquisition through monitoring in order — a complete, defensible design (Herman, Ch. 1)."}
+];
+
+const reinforce = [
+  {l:"Analyzing", q:"A team collects trending-hashtag data by writing a program that automatically extracts posts from a public website. The acquisition technique is:",
+   c:["A. Survey","B. Web scraping","C. Sensor logging","D. Imputation"], a:"B",
+   e:"Programmatic extraction from web pages is web scraping (Herman, Ch. 2)."},
+  {l:"Applying", q:"A dataset records the same date as \"3/7/26\", \"July 3, 2026\", and \"2026-07-03\". The correct first fix is:",
+   c:["A. Imputation","B. Standardization to a single date format","C. Deleting all date fields","D. Augmentation"], a:"B",
+   e:"Consistent formatting is standardization (Plaue, Sec. 1.4)."},
+  {l:"Evaluating", q:"An analyst plans to delete every row with any missing value, though 40% of rows have at least one blank. The best evaluation of this plan is:",
+   c:["A. Good — incomplete rows are worthless","B. Risky — it discards a large share of the data and may bias the sample; imputation should be considered","C. Required — models cannot run with missing values","D. Neutral — sample size does not affect analysis"], a:"B",
+   e:"Mass deletion shrinks and can bias the dataset; imputation preserves information (Plaue, Sec. 1.4)."},
+  {l:"Analyzing", q:"After two encoders merge barangay census files, several households appear twice with slightly different name spellings. The cleaning operation needed is:",
+   c:["A. Deduplication","B. Validation","C. Augmentation","D. Prediction"], a:"A",
+   e:"Same households, multiple records — deduplicate before counting (Plaue, Sec. 1.4)."},
+  {l:"Applying", q:"Estimating the margin of error of a pre-election survey draws mainly on which pillar?",
+   c:["A. Data organization","B. Stochastics","C. Machine learning","D. Visualization"], a:"B",
+   e:"Margins of error come from probability and inferential statistics (Plaue, Intro.)."},
+  {l:"Analyzing", q:"A telco processes millions of call records per hour in many formats from many systems. This scenario best illustrates:",
+   c:["A. Small data","B. Big data","C. Descriptive statistics","D. Deduplication"], a:"B",
+   e:"Extremely large, complex, fast-arriving datasets beyond traditional tools = big data (Herman, Ch. 1)."},
+  {l:"Evaluating", q:"A dashboard shows last month's sales per branch; a second system recommends price changes based on forecasted demand. The correct classification is:",
+   c:["A. Both descriptive","B. Both predictive","C. First descriptive, second predictive analytics","D. First inferential, second descriptive"], a:"C",
+   e:"Summarizing history is descriptive; forecasting to guide action is predictive analytics (Herman, Ch. 1)."},
+  {l:"Analyzing", q:"A week of missing readings from an offline sensor is discovered months later. Which pairing is correct?",
+   c:["A. Quality dimension: completeness; lifecycle stage that should have flagged it: monitoring","B. Quality dimension: accuracy; stage: model development","C. Quality dimension: consistency; stage: acquisition","D. Quality dimension: timeliness; stage: EDA only"], a:"A",
+   e:"A gap in coverage is a completeness issue, and live monitoring is designed to catch it early (Plaue, Sec. 1.3; Herman, Ch. 1)."},
+  {l:"Applying", q:"Cleaning raw survey exports, fixing categories, and reshaping tables into an analysis-ready file belongs to which lifecycle stage?",
+   c:["A. Data preparation","B. Model evaluation","C. Deployment","D. Acquisition"], a:"A",
+   e:"Transforming raw data into usable form is preparation (Herman, Ch. 1)."},
+  {l:"Analyzing", q:"Why should EDA precede model development?",
+   c:["A. It is required by law","B. It reveals distributions, outliers, and relationships that guide model choice and prevent avoidable errors","C. It replaces the need for evaluation","D. It increases dataset size"], a:"B",
+   e:"Exploration informs sensible modeling decisions (Herman, Chs. 1–2)."},
+  {l:"Evaluating", q:"A vendor claims its analytics product \"never needs monitoring after installation.\" The soundest critique is:",
+   c:["A. Correct — deployment is the final stage","B. Incorrect — data and behavior change over time, so unmonitored models silently degrade","C. Correct — monitoring is only for hardware","D. Incorrect — monitoring is only needed before deployment"], a:"B",
+   e:"The lifecycle is a loop; monitoring guards against drift (Herman, Ch. 1)."},
+  {l:"Applying", q:"A ride app's arrival-time estimator is primarily an example of:",
+   c:["A. Inference","B. Prediction","C. Standardization","D. Deduplication"], a:"B",
+   e:"It forecasts an outcome for each individual trip (Herman, Ch. 2)."},
+  {l:"Analyzing", q:"A city health office wants to conclude whether its vaccination drive reduced cases across the whole city, not just in sampled clinics. This is primarily:",
+   c:["A. Prediction","B. Inference","C. Augmentation","D. Visualization"], a:"B",
+   e:"Generalizing an effect to the population is inference (Herman, Ch. 2)."},
+  {l:"Applying", q:"Which activity is data augmentation?",
+   c:["A. Rotating and re-cropping photos of rice leaves to expand a small training set","B. Removing duplicate farmer records","C. Converting \"kg\" and \"kilos\" to one unit","D. Flagging a negative harvest weight"], a:"A",
+   e:"Creating additional examples enriches the dataset — augmentation (Plaue, Sec. 1.4)."},
+  {l:"Analyzing", q:"A record lists a person's weight as 650 kg. The quality problem and its cleaning response are:",
+   c:["A. Completeness → imputation","B. Implausible value → validation","C. Duplication → deduplication","D. Formatting → standardization"], a:"B",
+   e:"Impossible values are caught by validation checks (Plaue, Secs. 1.3–1.4)."},
+  {l:"Evaluating", q:"A school reuses data collected for enrollment to build an unrelated commercial marketing model without informing students. The best assessment is:",
+   c:["A. Acceptable — the school owns the data","B. Problematic — data integrity and responsible collection require that data use match its declared purpose and respect the data subjects","C. Acceptable — as long as the model is accurate","D. Problematic only if the model performs poorly"], a:"B",
+   e:"Quality and integrity include responsible, purpose-consistent use — previewing Ch. 12's ethics discussion (Herman, Ch. 2)."},
+  {l:"Analyzing", q:"Traditional software follows rules written by programmers; a churn model discovers its own rules from historical customer data. This contrast defines:",
+   c:["A. Descriptive vs. inferential statistics","B. Machine learning vs. explicit programming","C. Big data vs. small data","D. Validation vs. imputation"], a:"B",
+   e:"ML learns patterns from data rather than following hand-coded rules (Herman, Ch. 1; Plaue, Intro.)."},
+  {l:"Applying", q:"Which project element belongs to the data organization pillar?",
+   c:["A. Designing the database structure and quality checks for barangay records","B. Testing whether two groups differ beyond chance","C. Training a neural network","D. Estimating a confidence interval"], a:"A",
+   e:"Structuring data and ensuring quality is data organization (Plaue, Intro. & Ch. 1)."},
+  {l:"Evaluating", q:"Two designs for a canteen study: (1) interview whoever passes by at lunch; (2) randomly sample students across year levels and schedules. The better design and reason:",
+   c:["A. Design 1 — it is faster","B. Design 2 — a representative sample supports valid inference about all students","C. Design 1 — lunch customers are the only relevant group","D. Either — sampling design does not affect conclusions"], a:"B",
+   e:"Representative acquisition is the foundation of trustworthy inference (Herman, Ch. 2)."},
+  {l:"Creating", q:"You deployed a dengue early-warning model for your municipality. Which monitoring plan is best designed?",
+   c:["A. None — deployment ends the project","B. Recheck the model only when complaints arrive","C. Track weekly prediction accuracy against reported cases, set alert thresholds for degradation, and schedule retraining when performance drops or new data patterns emerge","D. Retrain daily regardless of performance"], a:"C",
+   e:"Systematic performance tracking with defined retraining triggers operationalizes the monitoring stage (Herman, Ch. 1)."}
+];
+
+const essays = [
+  {q:"Essay 1. Automation and the analyst: AutoML and augmented analytics can now automate parts of data preparation, model development, and evaluation (Herman, Ch. 8). Will the six-stage data science lifecycle still matter in the future? Argue your position and defend which stages will remain most human.",
+   m:"A strong answer argues the lifecycle remains essential even as tools automate individual stages. AutoML accelerates model development and evaluation, and augmented analytics speeds preparation and EDA, but the lifecycle is a framework of accountability, not just a sequence of tasks: someone must still define the problem, judge data quality and relevance, interpret results in context, and decide whether a model should be deployed at all. The most human stages are likely acquisition framing (what data should we collect, and is it representative and ethical?), interpretation of EDA and evaluation results, and deployment-and-monitoring judgment, where business, social, and ethical stakes are weighed. Automation shifts the analyst's role from manual computation toward supervision, critique, and decision-making — which makes understanding the lifecycle more important, not less."},
+  {q:"Essay 2. Real-time everything: Herman (Ch. 8) points to real-time analytics, IoT, and edge computing as major trends. Explain how continuous, sensor-driven data acquisition could change the way organizations — including Philippine LGUs — move through the lifecycle, and identify one new risk this speed creates.",
+   m:"With IoT sensors and edge computing, acquisition becomes continuous rather than periodic: flood sensors, traffic counters, and utility meters stream data constantly, so preparation, analysis, and even model updating must run in near real time. For LGUs, this could mean early-warning systems that trigger evacuation advisories or dynamic traffic-management decisions within minutes instead of after month-end reports, effectively collapsing the lifecycle into a fast, repeating loop where deployment and monitoring merge. The key new risk is acting on unvalidated data: at real-time speed there is less opportunity for careful cleaning and human review, so a faulty sensor or anomalous reading can propagate directly into automated decisions. Future systems therefore need automated validation and quality checks built into the stream itself, plus clear human override points."},
+  {q:"Essay 3. Data as a strategic — and sensitive — asset: Herman (Ch. 8) predicts data ethics, privacy, and governance will sit at the center of analytics' future. As data becomes central to every industry, what responsibilities will future Filipino data scientists carry, and why is technical skill alone insufficient?",
+   m:"As organizations treat data as a strategic asset, data scientists become custodians of information about real people — patients, commuters, students, borrowers. Future practitioners will be responsible for lawful and consent-consistent collection, privacy protection, fairness across groups, transparency about how models reach conclusions, and honest communication of uncertainty. In the Philippine context this includes compliance with data-privacy regulation and sensitivity to communities that could be excluded or harmed by biased data. Technical skill alone is insufficient because a perfectly accurate model can still be unethical — it can rely on improperly obtained data, embed discrimination, or be deployed without accountability. Governance frameworks, ethical judgment, and communication skills are what turn technically correct analytics into trustworthy analytics — the theme this course returns to in Chapter 12 and in the capstone's ethics requirements."}
+];
+
+function esc(s){return s;}
+function renderSelf(){
+  const el = document.getElementById('selfcheck');
+  selfCheck.forEach((it,i)=>{
+    el.insertAdjacentHTML('beforeend',
+      `<div class="qcard"><span class="qnum">${i+1}</span> <b>${esc(it.q)}</b>
+       <details><summary>Show answer</summary>
+       <p><span class="ans">Answer:</span> ${esc(it.a)}</p>
+       <p><b>Why:</b> ${esc(it.e)}</p></details></div>`);
+  });
+}
+function renderMCQ(id, items){
+  const el = document.getElementById(id);
+  items.forEach((it,i)=>{
+    const ch = it.c.map(c=>`<div>${esc(c)}</div>`).join('');
+    el.insertAdjacentHTML('beforeend',
+      `<div class="qcard"><span class="qnum">${i+1}</span> <b>${esc(it.q)}</b>
+       <span class="lvl ${it.l}">${it.l}</span>
+       <div class="choices">${ch}</div>
+       <details><summary>Show answer &amp; explanation</summary>
+       <p><span class="ans">Correct answer: ${it.a}</span></p>
+       <p>${esc(it.e)}</p></details></div>`);
+  });
+}
+function renderEssays(){
+  const el = document.getElementById('essays');
+  essays.forEach((it)=>{
+    el.insertAdjacentHTML('beforeend',
+      `<div class="qcard"><b>${esc(it.q)}</b>
+       <details><summary>Show model short answer</summary>
+       <div class="essay-model">${esc(it.m)}</div></details></div>`);
+  });
+}
+renderSelf(); renderMCQ('hots', hots); renderMCQ('reinforce', reinforce); renderEssays();
+</script>
+</body>
+</html>
