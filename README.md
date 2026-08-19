@@ -1,42 +1,22 @@
-# AST09 · Data Science and Analysis — Course Website
+# Chapter lectures
 
-**Rizal Technological University · First Semester, A.Y. 2026–2027**
-Course Professor: **Dr. Ryan Manuel D. Guido** · Teaching Assistant: **Instr. Princess B. Tucio**
+Upload each interactive chapter lecture here as the semester progresses, using
+exactly these filenames so the links on the course home page activate
+automatically:
 
-This repository hosts the complete course syllabus and the twelve interactive chapter lectures for AST09 (Data Science and Analysis), a 3-unit, 15-week lecture course (prerequisite: AST06) covering inferential and advanced statistics, the principles of data science, the Python ecosystem via Google Colab, and a research capstone toward a Scopus-indexed conference paper.
+    chapter-01.html   Wk 1  · Principles of Data Science and the Analytics Lifecycle
+    chapter-02.html   Wk 2  · Sampling, Estimation, and Confidence Intervals
+    chapter-03.html   Wk 3  · Hypothesis Testing
+    chapter-04.html   Wk 4  · Statistical Experiments: A/B Testing, Resampling, Chi-Square, and ANOVA
+    chapter-05.html   Wk 6  · Linear Regression and Prediction
+    chapter-06.html   Wk 7  · Logistic Regression and Classification
+    chapter-07.html   Wk 8  · Multivariate Statistics, PCA, and Clustering
+    chapter-08.html   Wk 9  · Statistical Machine Learning
+    chapter-09.html   Wk 11 · Python for Data Science: Environment, NumPy, and pandas
+    chapter-10.html   Wk 12 · Exploratory Data Analysis and Data Visualization
+    chapter-11.html   Wk 13 · Statistical Modeling and Machine Learning in Python
+    chapter-12.html   Wk 14 · Data Storytelling, Ethics, and the Research Paper
 
-## Contents
-
-| Path | Description |
-|---|---|
-| `index.html` | The full course syllabus (overview, outcomes, outline, learning plan, course map, grading, capstone, readings, policies) with links to all lectures |
-| `chapters/chapter-01.html` … `chapter-12.html` | Interactive chapter lectures — each with worked examples, a self-check quiz, a 20-item HOTS test, a 20-item HOTS reinforcement assignment, and a 3-item futures essay |
-| `assets/banner.png` | Google Classroom banner (2000×500) |
-| `assets/banner-overlay-safe.png` | Banner variant with the lower-left kept clear for Classroom's class-name overlay |
-| `.nojekyll` | Tells GitHub Pages to serve files as-is (no Jekyll processing) |
-
-## How to publish with GitHub Pages
-
-1. Create a new repository on GitHub (e.g., `ast09-syllabus`). Public repositories get free GitHub Pages hosting.
-2. Upload **all files and folders** in this package to the repository root (drag-and-drop on github.com works: *Add file → Upload files*). Keep the folder structure intact.
-3. In the repository, go to **Settings → Pages**.
-4. Under **Build and deployment**, set **Source** to *Deploy from a branch*, choose the **main** branch and the **/ (root)** folder, then **Save**.
-5. After a minute or two, the site is live at:
-
-   ```
-   https://<your-username>.github.io/ast09-syllabus/
-   ```
-
-   Individual lectures resolve automatically, e.g.
-   `https://<your-username>.github.io/ast09-syllabus/chapters/chapter-03.html`
-
-6. Share the main URL with the class (it also works pasted into Google Classroom as a Material link). Any file you later edit and re-upload republishes automatically.
-
-## Notes
-
-- Everything is self-contained static HTML — no build step, no dependencies, no server code.
-- Pages are responsive (phone-friendly) and print-friendly (the syllabus hides its navigation bar when printed).
-- Assessment answer keys are inside `<details>` dropdowns in each chapter; students tap **Show answer** to self-check.
-
----
-© Rizal Technological University · Prepared for AST09, A.Y. 2026–2027 · Dr. Ryan Manuel D. Guido
+No edits to index.html are needed: chapters that are not yet uploaded are shown
+as "coming soon" on the home page, and a chapter's link switches to "posted" the
+moment its file exists at the expected name.

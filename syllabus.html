@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Data Science and Analysis — Course Syllabus | AST09</title>
+<style>
+  :root{
+    --navy:#1a2f5a; --navy-dark:#12213f; --gold:#c9a227; --accent:#2e6da4;
+    --new:#0e7c4a; --upd:#b3541e; --ink:#26303b; --muted:#5c6b7a;
+    --line:#d8dee6; --bg:#f4f6f9; --card:#ffffff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:Georgia,'Times New Roman',serif;color:var(--ink);background:var(--bg);line-height:1.65;}
+  .sans{font-family:'Segoe UI',Arial,Helvetica,sans-serif;}
+
+  header.masthead{background:linear-gradient(135deg,var(--navy-dark),var(--navy) 60%,#24457e);color:#fff;padding:42px 24px 34px;text-align:center;}
+  header.masthead .kicker{font-family:'Segoe UI',Arial,sans-serif;font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;color:#c7d3e8;}
+  header.masthead h1{font-size:1.9rem;margin:.45em auto .25em;max-width:900px;letter-spacing:.01em;}
+  header.masthead .subtitle{font-family:'Segoe UI',Arial,sans-serif;color:#dbe4f3;font-size:.92rem;}
+  header.masthead .rule{width:90px;height:3px;background:var(--gold);margin:16px auto 0;border-radius:2px;}
+
+  nav{position:sticky;top:0;z-index:50;background:var(--navy-dark);box-shadow:0 2px 8px rgba(0,0,0,.25);}
+  nav ul{display:flex;flex-wrap:wrap;justify-content:center;list-style:none;}
+  nav a{display:block;padding:10px 13px;color:#e7edf7;text-decoration:none;font-family:'Segoe UI',Arial,sans-serif;font-size:.8rem;letter-spacing:.03em;}
+  nav a:hover{background:var(--navy);color:var(--gold);}
+
+  main{max-width:980px;margin:0 auto;padding:34px 20px 70px;}
+  section{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:30px 36px;margin-bottom:28px;box-shadow:0 1px 4px rgba(20,35,60,.06);scroll-margin-top:64px}
+  h2{font-family:'Segoe UI',Arial,sans-serif;color:var(--navy);font-size:1.3rem;border-bottom:3px solid var(--gold);padding-bottom:8px;margin-bottom:18px;}
+  h3{font-family:'Segoe UI',Arial,sans-serif;color:var(--accent);font-size:1.06rem;margin:24px 0 10px;}
+  h4{font-family:'Segoe UI',Arial,sans-serif;color:var(--navy);font-size:.95rem;margin:16px 0 6px;}
+  p{margin-bottom:13px;text-align:justify;}
+  ul.plain{margin:0 0 13px 24px;}
+  ul.plain li{margin-bottom:6px;}
+  ol.plain{margin:0 0 13px 26px;}
+  ol.plain li{margin-bottom:6px;}
+
+  .lead{font-size:1.06rem;color:#33404e;}
+  .callout{background:#eef3fa;border-left:4px solid var(--accent);padding:14px 18px;border-radius:0 6px 6px 0;margin:16px 0;font-size:.95rem;}
+  .callout.gold{background:#faf6e9;border-left-color:var(--gold);}
+  .callout.green{background:#f2f7ee;border-left-color:var(--new);}
+  .callout .label{display:block;font-family:'Segoe UI',Arial,sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--navy);margin-bottom:4px;}
+
+  .info-grid{display:grid;grid-template-columns:200px 1fr;gap:8px 18px;font-size:.98rem;}
+  .info-grid dt{font-family:'Segoe UI',Arial,sans-serif;font-weight:600;color:var(--navy);}
+  .info-grid dd{margin:0;}
+
+  .badge{display:inline-block;font-family:'Segoe UI',Arial,sans-serif;font-size:.62rem;font-weight:700;letter-spacing:.08em;padding:2px 8px;border-radius:10px;vertical-align:middle;text-transform:uppercase;margin-left:6px;}
+  .badge.new{background:#e2f4ea;color:var(--new);border:1px solid #9fd4b6;}
+  .badge.updated{background:#fbeadd;color:var(--upd);border:1px solid #e2b28c;}
+  .badge.mandated{background:#fde8e8;color:#a52a2a;border:1px solid #e8a8a8;}
+
+  table{width:100%;border-collapse:collapse;font-size:.9rem;margin:14px 0 6px;}
+  th{background:var(--navy);color:#fff;font-family:'Segoe UI',Arial,sans-serif;font-weight:600;padding:9px 12px;text-align:left;}
+  td{border:1px solid var(--line);padding:9px 12px;vertical-align:top;background:#fff;}
+  tr:nth-child(even) td{background:#f7f9fc;}
+  .unit-row td{background:#e9eef6 !important;color:var(--navy);font-family:'Segoe UI',Arial,sans-serif;font-weight:700;letter-spacing:.04em;font-size:.85rem;}
+  .week-col{width:78px;white-space:nowrap;font-weight:600;color:var(--navy);}
+  .period-banner{background:linear-gradient(90deg,var(--navy),#2c4d88);color:#fff;font-family:'Segoe UI',Arial,sans-serif;font-weight:600;padding:10px 16px;border-radius:6px;margin:24px 0 4px;letter-spacing:.04em;font-size:.95rem;}
+
+  .legend{display:flex;gap:14px;flex-wrap:wrap;margin:10px 0 4px;font-family:'Segoe UI',Arial,sans-serif;font-size:.8rem;color:var(--muted);align-items:center;}
+
+  .timeline{list-style:none;margin:14px 0;padding-left:0;}
+  .timeline li{position:relative;padding:0 0 14px 26px;border-left:2px solid #c6d2e4;margin-left:8px;}
+  .timeline li:last-child{border-left:2px solid transparent;}
+  .timeline li::before{content:"";position:absolute;left:-7px;top:4px;width:12px;height:12px;border-radius:50%;background:var(--gold);border:2px solid var(--navy);}
+  .timeline .when{font-family:'Segoe UI',Arial,sans-serif;font-weight:700;color:var(--navy);font-size:.85rem;display:block;}
+
+  footer{background:var(--navy-dark);color:#b9c6da;text-align:center;padding:24px 16px;font-family:'Segoe UI',Arial,sans-serif;font-size:.8rem;}
+  @media (max-width:700px){.info-grid{grid-template-columns:1fr;} section{padding:20px 16px;} table{font-size:.8rem;} th,td{padding:6px 8px;}}
+  @media print{nav{display:none;} body{background:#fff;} section{box-shadow:none;border:none;page-break-inside:avoid;} header.masthead{-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="kicker">Republic of the Philippines · Rizal Technological University · Cities of Mandaluyong and Pasig</div>
+  <h1>Data Science and Analysis — Course Syllabus</h1>
+  <div class="subtitle">AST09 Syllabus • Course Professor: Dr. Ryan Manuel D. Guido • Teaching Assistant: Instr. Princess B. Tucio</div>
+  <div class="rule"></div>
+</header>
+
+<nav class="sans">
+  <ul>
+    <li><a href="index.html">⌂ Home</a></li>
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#outcomes">Learning Outcomes</a></li>
+    <li><a href="#outline">Course Outline</a></li>
+    <li><a href="#plan">Learning Plan</a></li>
+    <li><a href="#map">Course Map</a></li>
+    <li><a href="#grading">Grading</a></li>
+    <li><a href="#capstone">Capstone</a></li>
+    <li><a href="#readings">Readings</a></li>
+    <li><a href="#policies">Policies</a></li>
+  </ul>
+</nav>
+
+<main>
+
+<!-- ============ OVERVIEW ============ -->
+<section id="overview">
+  <h2>Course Overview</h2>
+  <dl class="info-grid">
+    <dt>Course Title</dt><dd><strong>Data Science and Analysis</strong></dd>
+    <dt>Course Code</dt><dd>AST09</dd>
+    <dt>Course Type</dt><dd>Lecture</dd>
+    <dt>No. of Units</dt><dd><strong>3 units</strong></dd>
+    <dt>Contact Hours</dt><dd><strong>3 hours per week · 15 weeks per semester, inclusive of the Preliminary, Midterm, and Final Examinations</strong></dd>
+    <dt>Prerequisites</dt><dd>AST06</dd>
+    <dt>Semester / Year Level</dt><dd>First Semester, 2nd Year · A.Y. 2026–2027</dd>
+    <dt>Course Professor</dt><dd><strong>Dr. Ryan Manuel D. Guido</strong></dd>
+    <dt>Teaching Assistant</dt><dd><strong>Instr. Princess B. Tucio</strong></dd>
+  </dl>
+
+  <h3>Course Description</h3>
+  <p>This course develops end-to-end competence in data science and analytics over a 15-week semester. It begins with a structured review of <strong>inferential statistics</strong> (estimation, confidence intervals, and hypothesis testing) and <strong>advanced statistics</strong> (regression, classification, multivariate methods, and statistical machine learning), then situates these techniques within the <strong>principles and lifecycle of data science</strong>, including the ethical and responsible use of data.</p>
+  <p>Students develop hands-on expertise in the <strong>Python scientific ecosystem</strong> — NumPy, pandas, Matplotlib/Seaborn, SciPy/statsmodels, and scikit-learn — delivered through cloud notebooks, <strong>using but not limited to Google Colab</strong>, and in <strong>data visualization and data storytelling</strong> for communicating insights. The course culminates in a <strong>research capstone</strong> in which student teams design, execute, and write up an original data science and analytics study formatted as a conference paper suitable for submission to a <strong>Scopus-indexed conference</strong>. Assessment is distributed across the Preliminary, Midterm, and Final examination periods in accordance with the University academic calendar.</p>
+  <div class="callout"><span class="label">Five Course Thrusts</span>(i) Review of inferential statistics · (ii) Review of advanced statistics · (iii) Principles of data science · (iv) Expertise in Python libraries for data science and analytics · (v) Research capstone toward a Scopus-indexed conference paper.</div>
+  <div class="callout green"><span class="label">Companion Lecture Series</span>This syllabus is paired with a full set of interactive chapter lecture discussions (Chapters 1–12), each with worked examples, a self-check quiz, a 20-item HOTS test, a 20-item HOTS reinforcement assignment, and a 3-item futures essay — all matched to this outline. Weeks 5, 10, and 15 are examination weeks and carry no new chapter. The lectures are posted on the <a href="index.html">course home page</a> as the semester progresses.</div>
+</section>
+
+<!-- ============ OUTCOMES ============ -->
+<section id="outcomes">
+  <h2>Learning Outcomes</h2>
+  <p>Upon completion of this course, the students should be able to:</p>
+
+  <h3>Knowledge</h3>
+  <ol class="plain">
+    <li><strong>(CO1)</strong> Apply inferential statistical techniques — point and interval estimation, confidence intervals, and parametric and resampling-based hypothesis tests — to draw valid conclusions from sample data.</li>
+    <li><strong>(CO2)</strong> Apply and evaluate advanced statistical methods, including linear and logistic regression, classification, ANOVA, multivariate analysis, clustering, and dimensionality reduction, with attention to model diagnostics, validation, and limitations.</li>
+    <li><strong>(CO3)</strong> Explain the principles, lifecycle, and foundations of data science — from data acquisition and preparation through modeling, evaluation, and deployment.</li>
+  </ol>
+
+  <h3>Skills</h3>
+  <ol class="plain">
+    <li><strong>(CO4)</strong> Demonstrate proficiency in Python and its data science libraries (NumPy, pandas, Matplotlib, Seaborn, SciPy/statsmodels, scikit-learn) to acquire, clean, transform, analyze, model, and visualize data.</li>
+    <li><strong>(CO6)</strong> Communicate analytical findings through effective data visualization and data storytelling, and produce a complete research paper that follows the format and quality standards of a Scopus-indexed conference.</li>
+  </ol>
+
+  <h3>Values and Research</h3>
+  <ol class="plain">
+    <li><strong>(CO5)</strong> Design and execute an original data science and analytics research study, from problem formulation and data collection through analysis and interpretation of results.</li>
+    <li>Uphold the ethical requirements of privacy, consent, fairness, transparency, and data governance in every stage of analytics work, and practice research integrity — honest reporting, proper citation, and similarity-checked writing. <span class="badge mandated">Ethics</span></li>
+    <li>Embody the RTU core values — Integrity, Innovativeness, Excellence, Nationalism, and Inclusivity — in the responsible use of data for Philippine communities.</li>
+  </ol>
+</section>
+
+<!-- ============ OUTLINE ============ -->
+<section id="outline">
+  <h2>Course Outline and Timeframe</h2>
+  <div class="legend">
+    <span><span class="badge mandated" style="margin-left:0">Exam</span> University examination week</span>
+    <span><span class="badge new" style="margin-left:0">Capstone</span> capstone milestone due</span>
+    <span><span class="badge updated" style="margin-left:0">Hands-on</span> hands-on Python session (Google Colab)</span>
+  </div>
+  <table>
+    <thead><tr><th class="week-col">Week</th><th style="width:64px">Ch.</th><th>Topic</th></tr></thead>
+    <tbody>
+      <tr class="unit-row"><td colspan="3">UNIT I — PRINCIPLES OF DATA SCIENCE AND REVIEW OF INFERENTIAL STATISTICS (PRELIM PERIOD)</td></tr>
+      <tr><td class="week-col">1</td><td>1</td><td>Principles of data science and the analytics lifecycle: definitions and terminology; the data science lifecycle; the three pillars; data collection, quality, and cleaning; inference vs. prediction; RTU VMV orientation</td></tr>
+      <tr><td class="week-col">2</td><td>2</td><td>Sampling, estimation, and confidence intervals: populations and samples, sampling distributions, Central Limit Theorem, point estimation, bootstrapping <span class="badge updated">Hands-on</span></td></tr>
+      <tr><td class="week-col">3</td><td>3</td><td>Hypothesis testing: null and alternative hypotheses, critical-value and p-value tests, Z-test and T-test, Type I/II errors, power and sample size <span class="badge updated">Hands-on</span></td></tr>
+      <tr><td class="week-col">4</td><td>4</td><td>Statistical experiments: A/B testing, permutation and resampling tests, chi-square, ANOVA, multiple testing <span class="badge updated">Hands-on</span></td></tr>
+      <tr><td class="week-col">5</td><td>—</td><td>PRELIMINARY EXAMINATION (coverage: Weeks 1–4) <span class="badge mandated">Exam</span> · Capstone team formation and topic registration <span class="badge new">Capstone</span></td></tr>
+      <tr class="unit-row"><td colspan="3">UNIT II — ADVANCED STATISTICS AND STATISTICAL MACHINE LEARNING (MIDTERM PERIOD)</td></tr>
+      <tr><td class="week-col">6</td><td>5</td><td>Linear regression and prediction: least squares, multiple regression, diagnostics, multicollinearity, confounding, extrapolation, confidence vs. prediction intervals <span class="badge updated">Hands-on</span></td></tr>
+      <tr><td class="week-col">7</td><td>6</td><td>Logistic regression and classification: the sigmoid and odds ratios, confusion matrix, precision/recall, ROC/AUC, imbalanced data <span class="badge updated">Hands-on</span></td></tr>
+      <tr><td class="week-col">8</td><td>7</td><td>Multivariate statistics, PCA, and clustering: covariance and correlation matrices, principal components, K-means, hierarchical and model-based clustering <span class="badge updated">Hands-on</span></td></tr>
+      <tr><td class="week-col">9</td><td>8</td><td>Statistical machine learning: loss and empirical risk, overfitting and the bias-variance trade-off, cross-validation, K-NN, trees, random forests, boosting · Capstone proposal colloquium <span class="badge new">Capstone</span></td></tr>
+      <tr><td class="week-col">10</td><td>—</td><td>MIDTERM EXAMINATION (coverage: Weeks 6–9) <span class="badge mandated">Exam</span> · Approved capstone proposal document due <span class="badge new">Capstone</span></td></tr>
+      <tr class="unit-row"><td colspan="3">UNIT III — PYTHON FOR DATA SCIENCE, COMMUNICATION, AND THE RESEARCH CAPSTONE (FINAL PERIOD)</td></tr>
+      <tr><td class="week-col">11</td><td>9</td><td>Python for data science I: environment setup (Google Colab, Jupyter), Python essentials, NumPy, pandas wrangling and cleaning · Capstone dataset acquisition and ethics screening <span class="badge updated">Hands-on</span> <span class="badge new">Capstone</span></td></tr>
+      <tr><td class="week-col">12</td><td>10</td><td>Exploratory data analysis and data visualization: robust statistics, chart selection, Matplotlib/Seaborn, decluttering and focused design · Capstone EDA notebook <span class="badge updated">Hands-on</span> <span class="badge new">Capstone</span></td></tr>
+      <tr><td class="week-col">13</td><td>11</td><td>Statistical modeling and machine learning in Python: scipy.stats, statsmodels, scikit-learn pipelines, leakage-proof validation · Capstone progress report (preliminary analysis) <span class="badge updated">Hands-on</span> <span class="badge new">Capstone</span></td></tr>
+      <tr><td class="week-col">14</td><td>12</td><td>Data storytelling, ethics, and the research paper: the Big Idea, narrative arc, storyboarding; privacy, fairness, transparency; IMRaD and Scopus submission · Camera-ready capstone paper due <span class="badge new">Capstone</span></td></tr>
+      <tr><td class="week-col">15</td><td>—</td><td>FINAL EXAMINATION (coverage: Weeks 11–14) <span class="badge mandated">Exam</span> · Capstone defense colloquium and final paper submission <span class="badge new">Capstone</span></td></tr>
+    </tbody>
+  </table>
+  <div class="callout gold"><span class="label">Design Note</span>The twelve instructional chapters map one-to-one to the twelve teaching weeks; the capstone runs in parallel from Week 5 through the Week 15 defense, so every statistical and computational skill is exercised on the team's own research data as it is learned.</div>
+</section>
+
+<!-- ============ LEARNING PLAN ============ -->
+<section id="plan">
+  <h2>Learning Plan</h2>
+
+  <div class="period-banner">PRELIM PERIOD — PRINCIPLES OF DATA SCIENCE AND INFERENTIAL STATISTICS (Weeks 1–5)</div>
+  <table>
+    <thead><tr><th style="width:19%">Learning Outcomes</th><th style="width:24%">Topic</th><th style="width:12%">Method</th><th style="width:27%">Resources</th><th style="width:18%">Assessment</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Describe the data science lifecycle; distinguish inference from prediction (CO3)</td>
+        <td><strong>Ch. 1 — Principles of data science</strong>: lifecycle, three pillars, data quality and cleaning, descriptive vs. inferential statistics</td>
+        <td>Interactive lecture; lifecycle case walkthrough; capstone briefing</td>
+        <td>Herman, Chs. 1–2; Plaue, Intro. &amp; Ch. 1; Grus, Ch. 1</td>
+        <td>Diagnostic assessment; recitation; Ch. 1 HOTS test &amp; reinforcement</td>
+      </tr>
+      <tr>
+        <td>Construct and interpret estimates and confidence intervals; compute bootstrap intervals (CO1)</td>
+        <td><strong>Ch. 2 — Sampling, estimation, and confidence intervals</strong>: sampling distributions, CLT, standard error, Student's t, the bootstrap</td>
+        <td>Lecture-discussion; board work; Colab practical 1: sampling distributions and CIs</td>
+        <td>Bruce et al., Ch. 2; Chan, Ch. 8 &amp; Secs. 9.1–9.2; Plaue, Ch. 4; Grus, Chs. 6–7</td>
+        <td>Problem set 1; Practical report 1; Ch. 2 HOTS test &amp; reinforcement</td>
+      </tr>
+      <tr>
+        <td>Formulate hypotheses; execute and interpret one- and two-sample tests correctly (CO1)</td>
+        <td><strong>Ch. 3 — Hypothesis testing</strong>: critical-value and p-value tests, Z/T tests, Type I/II errors, statistical vs. practical significance, power</td>
+        <td>Lecture-discussion; worked examples; Colab practical 2: hypothesis testing on real data</td>
+        <td>Chan, Secs. 9.3–9.4; Bruce et al., Ch. 3; Plaue, Ch. 4; Grus, Ch. 7</td>
+        <td>Quiz 1; Practical report 2; Ch. 3 HOTS test &amp; reinforcement</td>
+      </tr>
+      <tr>
+        <td>Design randomized experiments; apply resampling, chi-square, and ANOVA; recognize the multiple-testing problem (CO1)</td>
+        <td><strong>Ch. 4 — Statistical experiments</strong>: A/B testing, permutation tests, chi-square, ANOVA and the F-statistic, multiple testing</td>
+        <td>Lecture-discussion; A/B case study; Colab practical 3: permutation tests and ANOVA</td>
+        <td>Bruce et al., Ch. 3; Grus, Ch. 7</td>
+        <td>Problem set 2; Practical report 3; Ch. 4 HOTS test &amp; reinforcement</td>
+      </tr>
+      <tr>
+        <td>Integrate Weeks 1–4 competencies; organize a capstone team around a feasible topic (CO1, CO3, CO5)</td>
+        <td><strong>Week 5 — Preliminary Examination</strong>; capstone team formation and topic registration</td>
+        <td>Written and practical examination; team consultations</td>
+        <td>All Weeks 1–4 references</td>
+        <td><strong>Preliminary Examination</strong>; registered team with three candidate topics and datasets</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="period-banner">MIDTERM PERIOD — ADVANCED STATISTICS AND STATISTICAL MACHINE LEARNING (Weeks 6–10)</div>
+  <table>
+    <thead><tr><th style="width:19%">Learning Outcomes</th><th style="width:24%">Topic</th><th style="width:12%">Method</th><th style="width:27%">Resources</th><th style="width:18%">Assessment</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Fit, diagnose, and interpret multiple regression models; distinguish explanation from prediction (CO2)</td>
+        <td><strong>Ch. 5 — Linear regression and prediction</strong>: least squares, model assessment, dummy variables, diagnostics, multicollinearity, confounding, extrapolation</td>
+        <td>Lecture-discussion; housing-data case; Colab practical 4: regression modeling and diagnostics</td>
+        <td>Bruce et al., Ch. 4; Plaue, Sec. 6.2; Herman, Ch. 2</td>
+        <td>Quiz 2; Practical report 4; Ch. 5 HOTS test &amp; reinforcement</td>
+      </tr>
+      <tr>
+        <td>Build and evaluate classification models with appropriate metrics (CO2)</td>
+        <td><strong>Ch. 6 — Logistic regression and classification</strong>: sigmoid and odds ratios, confusion matrix, precision/recall, ROC/AUC, imbalanced-data strategies</td>
+        <td>Lecture-discussion; classification case; Colab practical 5: logistic regression and evaluation</td>
+        <td>Bruce et al., Ch. 5; Plaue, Sec. 6.3; Chan, Sec. 9.5</td>
+        <td>Problem set 3; Practical report 5; Ch. 6 HOTS test &amp; reinforcement</td>
+      </tr>
+      <tr>
+        <td>Apply PCA for dimensionality reduction; segment data with clustering; interpret components and clusters (CO2)</td>
+        <td><strong>Ch. 7 — Multivariate statistics, PCA, and clustering</strong>: covariance/correlation matrices, principal components, K-means, hierarchical and model-based clustering, scaling</td>
+        <td>Lecture-discussion; Colab practical 6: PCA and clustering</td>
+        <td>Bruce et al., Ch. 7; Plaue, Secs. 5.3–5.4 &amp; 7.2–7.3</td>
+        <td>Quiz 3; Practical report 6; Ch. 7 HOTS test &amp; reinforcement</td>
+      </tr>
+      <tr>
+        <td>Explain overfitting and the bias-variance trade-off; validate models with cross-validation; defend a capstone proposal (CO2, CO3, CO5)</td>
+        <td><strong>Ch. 8 — Statistical machine learning</strong>: empirical risk, train/validate/test discipline, K-NN, trees, bagging, random forests, boosting · <em>Capstone proposal colloquium</em></td>
+        <td>Lecture-discussion; Colab practical 7: tree models and cross-validation; panel presentations</td>
+        <td>Bruce et al., Ch. 6; Plaue, Sec. 6.1 &amp; 6.3.2; Herman, Ch. 4</td>
+        <td>Problem set 4; Practical report 7; capstone proposal pitch (rubric-scored)</td>
+      </tr>
+      <tr>
+        <td>Integrate Weeks 6–9 competencies; finalize an approved research plan (CO2, CO5)</td>
+        <td><strong>Week 10 — Midterm Examination</strong>; approved capstone proposal document due</td>
+        <td>Written and practical examination; proposal approval consultations</td>
+        <td>All Weeks 6–9 references</td>
+        <td><strong>Midterm Examination</strong>; approved proposal document (rubric-scored)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="period-banner">FINAL PERIOD — PYTHON, COMMUNICATION, AND THE RESEARCH CAPSTONE (Weeks 11–15)</div>
+  <table>
+    <thead><tr><th style="width:19%">Learning Outcomes</th><th style="width:24%">Topic</th><th style="width:12%">Method</th><th style="width:27%">Resources</th><th style="width:18%">Assessment</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Set up a reproducible environment; wrangle and clean real datasets with NumPy and pandas (CO4)</td>
+        <td><strong>Ch. 9 — Python for data science I</strong>: Google Colab and Jupyter notebooks, Python essentials, NumPy vectorization, pandas wrangling, cleaning in code · <em>Capstone dataset acquisition</em></td>
+        <td>Guided hands-on studio; messy-data challenge; Colab practical 8: NumPy and pandas</td>
+        <td>Herman, Ch. 9; Grus, Chs. 2, 4, 9–10, 25; Bruce et al., Ch. 1; Plaue, Sec. 1.4</td>
+        <td>Quiz 4 (practical); Practical report 8; capstone data dictionary and ethics screening</td>
+      </tr>
+      <tr>
+        <td>Perform EDA; build clear, honest, decluttered charts for defined audiences (CO4, CO6)</td>
+        <td><strong>Ch. 10 — EDA and data visualization</strong>: robust statistics, chart selection, Matplotlib/Seaborn, context, decluttering, focused attention · <em>Capstone EDA</em></td>
+        <td>Studio session: chart makeovers; Colab practical 9: EDA and visualization portfolio</td>
+        <td>Bruce et al., Ch. 1; Plaue, Ch. 2; Grus, Ch. 3; Herman, Ch. 3; Knaflic (2015), Chs. 1–5</td>
+        <td>Practical report 9; visualization critique; capstone EDA notebook</td>
+      </tr>
+      <tr>
+        <td>Implement the statistical toolkit in Python; build leakage-free scikit-learn pipelines (CO2, CO4)</td>
+        <td><strong>Ch. 11 — Modeling and ML in Python</strong>: scipy.stats, statsmodels summaries, fit/predict/score, pipelines, cross-validation in code · <em>Capstone modeling</em></td>
+        <td>Guided hands-on studio; Colab practical 10: end-to-end modeling pipeline; consultations</td>
+        <td>Bruce et al., Chs. 3–6 (code); Grus, Ch. 25; Plaue, Ch. 6</td>
+        <td>Practical report 10; capstone progress report (preliminary analysis notebook)</td>
+      </tr>
+      <tr>
+        <td>Craft a data narrative; evaluate work against ethical criteria; produce a conference-format manuscript (CO3, CO5, CO6)</td>
+        <td><strong>Ch. 12 — Data storytelling, ethics, and the research paper</strong>: Big Idea, three-act structure, storyboarding; privacy, fairness, transparency; IMRaD and Scopus logistics · <em>Camera-ready paper due</em></td>
+        <td>Storyboard workshop; ethics self-audit; writing workshop with internal peer review (mock referee reports)</td>
+        <td>Knaflic (2015), Chs. 1, 6–9; Knaflic (2019), Chs. 1, 6; Ryan, Chs. 1, 4, 8; Vora, Chs. 1–3; Herman, Ch. 5 &amp; App. B; Plaue, Ch. 8</td>
+        <td>Data-story workshop output; ethics checklist; full capstone paper with similarity report</td>
+      </tr>
+      <tr>
+        <td>Integrate full-course competencies; defend the capstone before a panel (CO1–CO6)</td>
+        <td><strong>Week 15 — Final Examination</strong>; capstone defense colloquium and final paper submission</td>
+        <td>Written and practical examination; panel defense with data-storytelling presentation</td>
+        <td>All references</td>
+        <td><strong>Final Examination</strong>; capstone defense (rubric-scored); final paper submission</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ============ COURSE MAP ============ -->
+<section id="map">
+  <h2>Course Map (Program Learning Outcomes)</h2>
+  <table>
+    <thead><tr><th>Program Outcomes</th><th style="width:120px;text-align:center">AST09</th></tr></thead>
+    <tbody>
+      <tr class="unit-row"><td colspan="2">A. INTELLECTUAL COMPETENCIES (Knowledge)</td></tr>
+      <tr><td>1. Apply knowledge of mathematics, statistics, and computing appropriate to data science and analytics practice (PO1)</td><td style="text-align:center">L</td></tr>
+      <tr><td>2. Analyze complex, data-rich problems and identify appropriate analytical and computational approaches (PO2)</td><td style="text-align:center">L</td></tr>
+      <tr><td>3. Design, implement, and evaluate data-driven solutions and models that meet defined requirements (PO3)</td><td style="text-align:center">P</td></tr>
+      <tr class="unit-row"><td colspan="2">B. PRACTICAL SKILLS</td></tr>
+      <tr><td>4. Use modern analytics tools, programming languages, and libraries effectively and appropriately (PO4)</td><td style="text-align:center">P</td></tr>
+      <tr><td>5. Communicate technical results effectively to specialist and non-specialist audiences, in oral, written, and visual forms (PO5)</td><td style="text-align:center">P</td></tr>
+      <tr class="unit-row"><td colspan="2">C. PERSONAL AND CIVIC RESPONSIBILITIES (Values)</td></tr>
+      <tr><td>6. Act in accordance with professional, legal, and ethical standards on data privacy, governance, and responsible analytics (PO6)</td><td style="text-align:center">P</td></tr>
+      <tr><td>7. Engage in independent and lifelong learning, including research and scholarly dissemination (PO7)</td><td style="text-align:center">P</td></tr>
+    </tbody>
+  </table>
+  <p class="sans" style="font-size:.85rem;color:var(--muted)"><strong>Legend:</strong> L = Learned &nbsp;·&nbsp; P = Practiced &nbsp;·&nbsp; O = Opportunity to learn. &nbsp;CO–PO mapping: CO1→PO1–PO2 · CO2→PO1–PO3 · CO3→PO2, PO6 · CO4→PO3–PO4 · CO5→PO2–PO3, PO7 · CO6→PO5–PO7.</p>
+</section>
+
+<!-- ============ GRADING ============ -->
+<section id="grading">
+  <h2>Course Requirements and Grading System</h2>
+  <table>
+    <thead><tr><th>Component</th><th style="width:140px;text-align:center">Weight</th></tr></thead>
+    <tbody>
+      <tr><td>Quizzes and activities</td><td style="text-align:center">30%</td></tr>
+      <tr><td>Recitation and practicals (Colab notebooks, coding exercises)</td><td style="text-align:center">20%</td></tr>
+      <tr><td>Major examinations — Preliminary (10%), Midterm (10%), Final (10%)</td><td style="text-align:center">30%</td></tr>
+      <tr><td>Capstone — proposal and progress deliverables (5%), full paper (10%), oral defense and data story (5%)</td><td style="text-align:center">20%</td></tr>
+      <tr class="unit-row"><td>TOTAL</td><td style="text-align:center">100%</td></tr>
+    </tbody>
+  </table>
+  <p class="sans" style="font-size:.85rem;color:var(--muted)">Final course grades follow the RTU 1.00–5.00 grading scale (1.00 highest; 3.00 = 75% minimum passing; 4.00 conditional; 5.00 failing), subject to the current University Student Handbook. A student must obtain a passing capstone mark to pass the course. Each chapter's HOTS test, HOTS reinforcement assignment, and futures essay (in the companion lecture series) may be drawn upon for quizzes, assignments, and examinations.</p>
+</section>
+
+<!-- ============ CAPSTONE ============ -->
+<section id="capstone">
+  <h2>Research Capstone: Paper for a Scopus-Indexed Conference</h2>
+  <p>Working in teams of two to four, students conduct an original data science and analytics study on a real dataset and report it as a full conference paper following the template and author guidelines of a specific target conference indexed in Scopus, selected with the Course Professor's approval. The study must demonstrate the complete analytics lifecycle: problem formulation, data acquisition and preparation, exploratory analysis, statistical or machine learning modeling with proper validation, visualization, interpretation, and ethically responsible reporting. Actual submission to the conference is encouraged and mentored but graded on submission-readiness, not on acceptance.</p>
+
+  <h3>Milestones</h3>
+  <ul class="timeline">
+    <li><span class="when">Week 5</span>Team formation and topic registration — registered team; three candidate topics with candidate datasets.</li>
+    <li><span class="when">Week 9</span>Proposal colloquium — panel pitch of the problem, research questions, dataset, methodology, and target conference.</li>
+    <li><span class="when">Week 10</span>Approved proposal document, alongside the Midterm Examination.</li>
+    <li><span class="when">Week 11</span>Data readiness — acquired and cleaned dataset; data dictionary; ethics screening of the data source.</li>
+    <li><span class="when">Week 13</span>Progress report — preliminary analysis notebook (EDA and initial models).</li>
+    <li><span class="when">Week 14</span>Full paper — camera-ready manuscript in the target conference template; similarity report; internal peer review completed.</li>
+    <li><span class="when">Week 15</span>Final defense — oral defense with data-storytelling presentation; final paper submission.</li>
+  </ul>
+
+  <h3>Capstone Rubric (100 points, scaled to the capstone weights above)</h3>
+  <table>
+    <thead><tr><th>Criterion</th><th style="width:90px;text-align:center">Points</th></tr></thead>
+    <tbody>
+      <tr><td>Problem formulation and related work</td><td style="text-align:center">10</td></tr>
+      <tr><td>Methodology and rigor (appropriate methods, validation, limitations)</td><td style="text-align:center">20</td></tr>
+      <tr><td>Analysis and correctness of results (reproducible code; honest uncertainty)</td><td style="text-align:center">20</td></tr>
+      <tr><td>Visualization quality (sound chart choice; decluttered; honest scales)</td><td style="text-align:center">10</td></tr>
+      <tr><td>Interpretation and insight (practical vs. statistical significance; evidence-based conclusions)</td><td style="text-align:center">15</td></tr>
+      <tr><td>Ethics and responsible data use (provenance, consent/privacy, fairness, integrity)</td><td style="text-align:center">10</td></tr>
+      <tr><td>Communication and conference readiness (IMRaD and template compliance; oral defense)</td><td style="text-align:center">15</td></tr>
+      <tr class="unit-row"><td>TOTAL</td><td style="text-align:center">100</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ============ READINGS ============ -->
+<section id="readings">
+  <h2>Required Readings and Other Materials</h2>
+
+  <h3>Core References</h3>
+  <ul class="plain">
+    <li>Bruce, P., Bruce, A., &amp; Gedeck, P. (2020). <em>Practical Statistics for Data Scientists: 50+ Essential Concepts Using R and Python</em> (2nd ed.). O'Reilly Media. — Chs. 1–7.</li>
+    <li>Chan, S. H. (2021). <em>Introduction to Probability for Data Science</em>. Michigan Publishing. — Ch. 8 (Estimation); Ch. 9 (Confidence and Hypothesis).</li>
+    <li>Grus, J. (2015). <em>Data Science from Scratch: First Principles with Python</em>. O'Reilly Media. — Chs. 1–7, 9–10, 25.</li>
+    <li>Herman, E. (2024). <em>Data Science for Decision Makers: Using Analytics and Case Studies</em>. Mercury Learning and Information. — Chs. 1–5, 9; App. B.</li>
+    <li>Knaflic, C. N. (2015). <em>Storytelling with Data: A Data Visualization Guide for Business Professionals</em>. John Wiley &amp; Sons. — Chs. 1–9.</li>
+    <li>Knaflic, C. N. (2019). <em>Storytelling with Data: Let's Practice!</em> John Wiley &amp; Sons. — Chs. 1, 6.</li>
+    <li>Plaue, M. (2023). <em>Data Science: An Introduction to Statistics and Machine Learning</em>. Springer. — Intro.; Chs. 1–2, 4; Secs. 5.3–5.4; Chs. 6–8.</li>
+    <li>Ryan, L. (2018). <em>Visual Data Storytelling with Tableau</em>. Addison-Wesley/Pearson. — Chs. 1, 4, 8.</li>
+    <li>Vora, S. (2019). <em>The Power of Data Storytelling</em>. SAGE Publications India. — Chs. 1–3.</li>
+  </ul>
+
+  <h3>Supplementary Materials</h3>
+  <ul class="plain">
+    <li>Official documentation of NumPy, pandas, Matplotlib, Seaborn, SciPy, statsmodels, and scikit-learn.</li>
+    <li>Author guidelines and camera-ready templates of the approved target Scopus-indexed conference.</li>
+    <li>Institutional research-ethics protocol and similarity-checking guidelines.</li>
+  </ul>
+
+  <h3>Class Materials</h3>
+  <ul class="plain">
+    <li>Companion interactive chapter lectures (Chapters 1–12), each with worked examples, a self-check quiz, a 20-item HOTS test, a 20-item HOTS reinforcement assignment, and a 3-item futures essay.</li>
+    <li>Hands-on Google Colab notebooks for Practicals 1–10; messy-data challenge datasets; chart-makeover exercises.</li>
+    <li>Templates: capstone proposal; data dictionary; ethics screening checklist; mock referee report; submission checklist.</li>
+  </ul>
+</section>
+
+<!-- ============ POLICIES ============ -->
+<section id="policies">
+  <h2>Course Policies</h2>
+  <h3>Attendance and Examinations</h3>
+  <p>Attendance and participation follow the RTU Student Handbook. Hands-on Python sessions are conducted within lecture hours using cloud notebooks — Google Colab by default — so a Google account and reliable internet access are expected. The Preliminary, Midterm, and Final Examinations follow the RTU academic calendar; special examinations are governed by University policy. Capstone milestone deadlines are firm because they gate conference-submission timelines.</p>
+  <h3>Academic Integrity and Responsible Use of AI Tools</h3>
+  <p>All submissions pass through similarity checking. Plagiarism, data fabrication, or falsification in any deliverable — including the capstone — results in a failing mark for that requirement and referral under institutional policy. Any use of generative AI in coursework or the capstone must be disclosed and is governed by the institution's academic integrity policy and the target conference's authorship policies.</p>
+  <h3>Data Ethics</h3>
+  <p>Capstone datasets must be legally and ethically obtained; studies involving human-subjects data require clearance under the institution's research ethics protocol before data collection. Data use must remain consistent with the purpose for which the data were collected, with anonymization and secure storage as defaults.</p>
+  <h3>Consultation</h3>
+  <p>Each capstone team is entitled to weekly consultation hours with the Course Professor, <strong>Dr. Ryan Manuel D. Guido</strong>, from Week 11 onward, in addition to the Week 9–10 proposal consultations. The Teaching Assistant, <strong>Instr. Princess B. Tucio</strong>, holds coding and Colab-assistance consultation hours weekly throughout the semester and is the first point of contact for practicals, notebook setup, and dataset issues.</p>
+</section>
+
+</main>
+
+<footer>
+  Data Science and Analysis (AST09) · Rizal Technological University · 15-week outcomes-based syllabus, First Semester A.Y. 2026–2027 · Course Professor: Dr. Ryan Manuel D. Guido · Teaching Assistant: Instr. Princess B. Tucio
+</footer>
+
+<script>
+/* Smooth in-page navigation that works inside sandboxed preview frames */
+(function(){
+  function go(e){
+    var href=this.getAttribute('href');
+    if(!href||href.charAt(0)!=='#')return;
+    var el=document.getElementById(href.slice(1));
+    if(el){e.preventDefault();el.scrollIntoView({behavior:'smooth',block:'start'});
+      if(history&&history.replaceState){history.replaceState(null,'',href);}}
+  }
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener('click',go);});
+})();
+</script>
+</body>
+</html>
